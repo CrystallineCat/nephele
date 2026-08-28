@@ -4,7 +4,6 @@ import {
     currentPlayerId,
     PartyStore,
     viewingPlayerId,
-    ViewingSheet,
 } from "../services/OBRHelper"
 
 function changeViewingSheet(playerId: string) {
@@ -43,7 +42,7 @@ function changeViewingSheet(playerId: string) {
     {/each}
 </ul>
 
-<style lang="scss">
+<style>
 ul {
     background: rgba(0, 0, 0, 0.25);
     margin: 0;

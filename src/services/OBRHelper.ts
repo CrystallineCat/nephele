@@ -3,11 +3,11 @@ import type { Player } from "@owlbear-rodeo/sdk"
 import { sheet } from "../stores"
 
 import { writable, get } from "svelte/store"
+import type { DummySheet } from "../types/sheet.type"
 
-let initViewingSheet: any = {
+let initViewingSheet: DummySheet = {
     id: 0,
     name: "",
-    notes: "",
     sections: [
         {
             id: 0,
@@ -53,7 +53,7 @@ async function initGM() {
         const vId = get(viewingPlayerId)
         for (const p of party) {
             if (p.id === vId) {
-                ViewingSheet.set(p.metadata.dummysheet)
+                ViewingSheet.set(p.metadata.dummysheet as DummySheet)
             }
         }
     })
@@ -67,7 +67,7 @@ async function initGM() {
         } else {
             const vs = ps.find((x) => x.id === vId)?.metadata.dummysheet
             if (vs) {
-                ViewingSheet.set(vs)
+                ViewingSheet.set(vs as DummySheet)
             }
         }
     })

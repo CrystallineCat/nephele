@@ -15,7 +15,7 @@ let editable = $derived($currentPlayerId === $viewingPlayerId)
     <button onclick={addStat}> Add Stat </button>
 {/if}
 
-<style lang="scss">
+<style>
 button {
     width: 100%;
     background: rgba(var(--accent), 0);

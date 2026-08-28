@@ -1,12 +1,9 @@
 <script lang="ts">
-// Import components
 import Sections from "./Sections.svelte"
 import SheetActions from "./SheetActions.svelte"
-import Notes from "./Notes.svelte"
 import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper"
 import type { DummySheet } from "../types/sheet.type"
 
-// Import stores
 import { editing } from "../stores"
 
 interface Props {
@@ -17,10 +14,6 @@ let { sheet = $bindable() }: Props = $props()
 
 let editable = $derived($currentPlayerId === $viewingPlayerId)
 let player = $state("")
-
-function toggleEditing() {
-    $editing = !$editing
-}
 </script>
 
 <div>
@@ -32,10 +25,9 @@ function toggleEditing() {
     <h4>{player}</h4>
     <SheetActions />
     <Sections bind:sections={sheet.sections} />
-    <Notes bind:notes={sheet.notes} />
 </div>
 
-<style lang="scss">
+<style>
 div {
     width: 90%;
     margin-left: auto;
@@ -53,17 +45,5 @@ h4 {
     margin: 0;
     color: rgb(var(--accent));
     text-align: right;
-}
-@media only screen and (min-width: 33.75em) {
-    div {
-        width: 85%;
-    }
-}
-@media only screen and (min-width: 60em) {
-    /* 960px */
-    div {
-        width: 75%;
-        max-width: 60rem;
-    }
 }
 </style>

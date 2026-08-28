@@ -1,7 +1,6 @@
 export type DummySheet = {
     id: number
     name: string
-    notes: string
     sections: Array<DummySheetSection>
 }
 

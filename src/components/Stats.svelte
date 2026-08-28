@@ -1,9 +1,7 @@
 <script lang="ts">
-// Import stores
 import { editing } from "../stores"
 import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper"
 
-// Import components
 import RemoveStat from "./RemoveStat.svelte"
 import AddStat from "./AddStat.svelte"
 import type { DummySheetStats } from "../types/sheet.type"
@@ -62,7 +60,7 @@ function removeStat(stat: DummySheetStats) {
     <AddStat {addStat} />
 {/if}
 
-<style lang="scss">
+<style>
 table {
     border-collapse: collapse;
     width: 100%;

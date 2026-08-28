@@ -17,7 +17,7 @@ let editable = $derived($currentPlayerId === $viewingPlayerId)
     <button onclick={() => removeStat(stat)}>&times;</button>
 {/if}
 
-<style lang="scss">
+<style>
 button {
     box-sizing: border-box;
     color: rgba(var(--accent), 0.25);

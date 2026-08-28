@@ -1,5 +1,4 @@
 <script lang="ts">
-//Import stores
 import { editing } from "../stores"
 
 function toggleEditing() {
@@ -15,7 +14,7 @@ function toggleEditing() {
     <button onclick={toggleEditing}>Edit</button>
 {/if}
 
-<style lang="scss">
+<style>
 button {
     margin-right: 0px;
     float: right;

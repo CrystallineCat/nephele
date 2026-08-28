@@ -1,19 +1,15 @@
 <script lang="ts">
-// Import components
 import Stats from "./Stats.svelte"
-import RemoveSection from "./RemoveSection.svelte"
 
-// Import Stores
 import { editing } from "../stores"
 import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper"
 import type { DummySheetSection } from "../types/sheet.type"
 
 interface Props {
     section: DummySheetSection
-    removeSection: (section: DummySheetSection) => void
 }
 
-let { section = $bindable(), removeSection }: Props = $props()
+let { section = $bindable() }: Props = $props()
 
 let editable = $derived($currentPlayerId === $viewingPlayerId)
 </script>
@@ -27,12 +23,9 @@ let editable = $derived($currentPlayerId === $viewingPlayerId)
         <h2>{section.name}</h2>
     {/if}
     <Stats bind:stats={section.stats} />
-    {#if editable && $editing}
-        <RemoveSection {section} {removeSection} />
-    {/if}
 </div>
 
-<style lang="scss">
+<style>
 div {
     padding: 1rem 0.5rem;
     border-width: 0.15rem;
