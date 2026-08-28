@@ -1,19 +1,18 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte'
     import { editing } from '../stores';
     import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper";
 
-    $: editable = $currentPlayerId === $viewingPlayerId; 
-    const dispatch = createEventDispatcher();
-
-    function onAddStat() {
-        dispatch('addStat');
+    interface Props {
+        addStat: () => void;
     }
 
+    let { addStat }: Props = $props();
+
+    let editable = $derived($currentPlayerId === $viewingPlayerId);
 </script>
 
 {#if editable && $editing}
-<button on:click={onAddStat}>
+<button onclick={addStat}>
     Add Stat
 </button>
 {/if}

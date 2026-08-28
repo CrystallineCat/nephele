@@ -1,16 +1,22 @@
 <script lang="ts">
     import { editing } from "../stores";
     import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper";
+    import type { DummySheetSection } from "../types/sheet.type";
 
-    $: editable = $currentPlayerId === $viewingPlayerId; 
-    
-    $: newSectionId = sections.length > 0 ? Math.max(...sections.map(t => t.id)) + 1 : 1
+    interface Props {
+        sections: DummySheetSection[];
+    }
+
+    let { sections = $bindable() }: Props = $props();
+
+    let editable = $derived($currentPlayerId === $viewingPlayerId);
+    let newSectionId = $derived(sections.length > 0 ? Math.max(...sections.map(t => t.id)) + 1 : 1);
 
     function addSection(){
-        sections = [...sections, 
-        { 
-            id: newSectionId, 
-            name: "New Section", 
+        sections = [...sections,
+        {
+            id: newSectionId,
+            name: "New Section",
             stats: [
                 {
                     id: 1,
@@ -20,12 +26,10 @@
             ]
         }]
     }
-
-    export let sections;
 </script>
 
 {#if editable && $editing}
-<button on:click={addSection} on:keydown={addSection}>
+<button onclick={addSection} onkeydown={addSection}>
  Add Section
 </button>
 {/if}
@@ -33,7 +37,7 @@
 <style lang="scss">
     button {
         float: right;
-        margin: 0 1rem; 
+        margin: 0 1rem;
         background: rgba(var(--accent),0);
         border: 1px solid rgb(var(--accent));
         border-radius: 0.15rem;

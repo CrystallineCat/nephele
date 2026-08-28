@@ -1,21 +1,20 @@
 <script lang="ts">
-    import { createEventDispatcher } from 'svelte'
     import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper";
     import { editing } from '../stores';
+    import type { DummySheetSection } from '../types/sheet.type';
 
-    $: editable = $currentPlayerId === $viewingPlayerId; 
-    const dispatch = createEventDispatcher();
-
-    export let section;
-
-    function onRemoveSection() {
-        dispatch('removeSection', section);
+    interface Props {
+        section: DummySheetSection;
+        removeSection: (section: DummySheetSection) => void;
     }
 
+    let { section, removeSection }: Props = $props();
+
+    let editable = $derived($currentPlayerId === $viewingPlayerId);
 </script>
 
 {#if editable && $editing}
-<button on:click={onRemoveSection}>
+<button onclick={() => removeSection(section)}>
     Remove Section
 </button>
 {/if}

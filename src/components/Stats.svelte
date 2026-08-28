@@ -1,13 +1,21 @@
 <script lang="ts">
     // Import stores
-    import { editing } from "../stores";    import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper";
+    import { editing } from "../stores";
+    import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper";
 
     // Import components
     import RemoveStat from "./RemoveStat.svelte";
     import AddStat from "./AddStat.svelte"
+    import type { DummySheetStats } from "../types/sheet.type";
 
-    $: newStatId = stats.length > 0 ? Math.max(...stats.map(t => t.id)) + 1 : 1
-    $: editable = $currentPlayerId === $viewingPlayerId; 
+    interface Props {
+        stats: DummySheetStats[];
+    }
+
+    let { stats = $bindable() }: Props = $props();
+
+    let newStatId = $derived(stats.length > 0 ? Math.max(...stats.map(t => t.id)) + 1 : 1);
+    let editable = $derived($currentPlayerId === $viewingPlayerId);
 
     function addStat(){
         stats = [...stats,
@@ -18,16 +26,14 @@
                 }
             ]
         }
-    function removeStat(stat) {
+    function removeStat(stat: DummySheetStats) {
         stats = stats.filter(t => t.id !== stat.id)
     }
-
-
-    export let stats;
 
 </script>
 
 <table>
+    <tbody>
     {#each stats as stat (stat.id)}
     <tr>
         {#if editable && $editing}
@@ -40,16 +46,17 @@
         {:else}
         <td>{stat.value}</td>
         {/if}
-        
+
 
         {#if editable && $editing}
-        <td style="width:0.5rem;"><RemoveStat bind:stat={stat} on:removeStat={e => removeStat(e.detail)}/></td>
+        <td style="width:0.5rem;"><RemoveStat stat={stat} removeStat={removeStat}/></td>
         {/if}
     </tr>
     {/each}
+    </tbody>
 </table>
 {#if $editing}
-<AddStat on:addStat={addStat}/>
+<AddStat addStat={addStat}/>
 {/if}
 
 
@@ -76,4 +83,4 @@
             color: rgba(var(--primary), 1);
         }
     }
-</style> 
+</style>

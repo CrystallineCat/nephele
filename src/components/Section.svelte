@@ -1,5 +1,4 @@
 <script lang="ts">
-    
     // Import components
     import Stats from './Stats.svelte'
     import RemoveSection from './RemoveSection.svelte';
@@ -7,11 +6,16 @@
     // Import Stores
     import { editing } from '../stores';
     import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper";
+    import type { DummySheetSection } from '../types/sheet.type';
 
-    // Export
-    export let section;
+    interface Props {
+        section: DummySheetSection;
+        removeSection: (section: DummySheetSection) => void;
+    }
 
-    $: editable = $currentPlayerId === $viewingPlayerId; 
+    let { section = $bindable(), removeSection }: Props = $props();
+
+    let editable = $derived($currentPlayerId === $viewingPlayerId);
 
 </script>
 
@@ -24,7 +28,7 @@
     {/if}
     <Stats bind:stats={section.stats}/>
     {#if editable && $editing}
-    <RemoveSection bind:section={section} on:removeSection/>
+    <RemoveSection section={section} removeSection={removeSection}/>
     {/if}
 </div>
 
@@ -33,7 +37,7 @@
         padding: 1rem 0.5rem;
         border-width: 0.15rem;
         border-style: solid;
-        border-image: 
+        border-image:
         linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(var(--accent)), rgba(0, 0, 0, 0)) 1 100%;
         border-right: none;
     }

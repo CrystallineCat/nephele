@@ -1,0 +1,48 @@
+schema: spec-driven
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+context: |
+  Project: nephele — a fork of DummySheet (kurara-ara/dummy-sheet), a
+  deliberately simple, system-agnostic RPG character sheet for people who
+  change systems often. Users edit sections/stats directly in the browser;
+  characters export/import as JSON. Integrates with Owlbear Rodeo via
+  @owlbear-rodeo/sdk (a GM can view player sheets through tabs).
+
+  Tech stack: Svelte 5 (runes), Vite 8, TypeScript 6, sass. Package manager:
+  npm (package-lock.json is committed). Scripts: `npm run dev` (vite),
+  `npm run build`, `npm run check` (svelte-check --tsconfig ./tsconfig.json).
+
+  Current shape: src/App.svelte is the shell; src/components/ holds the
+  sheet UI (sections, stats, theme editor, file import/export, GM binder
+  tabs). State lives in src/stores.ts (svelte stores) persisted to
+  localStorage via src/localStore.ts; src/services/OBRHelper.ts wraps the
+  Owlbear Rodeo SDK. Types in src/types/ (sheet, JSON schema).
+
+  Conventions that MUST be followed in this project:
+  - Run `npm run check` after changing TypeScript or Svelte files; it must
+    pass clean.
+  - Keep the sheet system-agnostic: no mechanics, stat names, or rules
+    hard-coded for a specific RPG system.
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always include a "Non-goals" section
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+# This is separate from artifact rules above.
+# Example:
+#   operations:
+#     apply:
+#       guidance:
+#         - Keep test summaries concise
+#     archive:
+#       guidance:
+#         - Summarize the archive outcome before finishing

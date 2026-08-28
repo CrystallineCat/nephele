@@ -1,19 +1,20 @@
 <script lang="ts">
     import { editing } from "../stores";
     import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper";
-    import { createEventDispatcher } from 'svelte'
-    const dispatch = createEventDispatcher();
+    import type { DummySheetStats } from "../types/sheet.type";
 
-    export let stat;
-    $: editable = $currentPlayerId === $viewingPlayerId; 
-
-    function onRemoveStat() {
-        dispatch('removeStat', stat);
+    interface Props {
+        stat: DummySheetStats;
+        removeStat: (stat: DummySheetStats) => void;
     }
+
+    let { stat, removeStat }: Props = $props();
+
+    let editable = $derived($currentPlayerId === $viewingPlayerId);
 </script>
 
 {#if editable && $editing}
-<button on:click={onRemoveStat}>&times;</button>
+<button onclick={() => removeStat(stat)}>&times;</button>
 {/if}
 
 <style lang="scss">

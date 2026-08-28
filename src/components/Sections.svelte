@@ -1,18 +1,22 @@
 <script lang="ts">
     // Import components
     import Section from "./Section.svelte";
+    import type { DummySheetSection } from "../types/sheet.type";
 
-    // Exports
-    export let sections = [];
+    interface Props {
+        sections?: DummySheetSection[];
+    }
 
-    function removeSection(section){
+    let { sections = $bindable([]) }: Props = $props();
+
+    function removeSection(section: DummySheetSection){
         sections = sections.filter(s => s.id !== section.id)
     }
 </script>
 
 <div>
-    {#each sections as section (section.id)}
-        <Section bind:section={section} on:removeSection={e => removeSection(e.detail)}/>
+    {#each sections as section, i (section.id)}
+        <Section bind:section={sections[i]} removeSection={removeSection}/>
     {/each}
 </div>
 

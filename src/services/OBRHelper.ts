@@ -68,8 +68,10 @@ async function initGM() {
     if (vId === cId){
       ViewingSheet.set(s);
     } else {
-      const vs = ps.find(x => x.id === vId).metadata.dummysheet;
-      ViewingSheet.set(vs);
+      const vs = ps.find(x => x.id === vId)?.metadata.dummysheet;
+      if (vs) {
+        ViewingSheet.set(vs);
+      }
     }
   });
   

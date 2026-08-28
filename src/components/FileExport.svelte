@@ -12,7 +12,7 @@
     }
 </script>
 
-<button on:click={exportFile}>Export</button>
+<button onclick={exportFile}>Export</button>
 
 <style lang="scss">
     button {

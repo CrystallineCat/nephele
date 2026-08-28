@@ -8,21 +8,19 @@
 
     // Import stores
     import { editing } from '../stores'
-    
-    $: editable = $currentPlayerId === $viewingPlayerId; 
-    let player = "";
 
-    // Exports
-    export let sheet:DummySheet;
-    
-    function toggleEditing(){ 
+    interface Props {
+        sheet: DummySheet;
+    }
+
+    let { sheet = $bindable() }: Props = $props();
+
+    let editable = $derived($currentPlayerId === $viewingPlayerId);
+    let player = $state("");
+
+    function toggleEditing(){
       $editing = !$editing;
     }
-
-    function removeSection(section){
-        sheet.sections = sheet.sections.filter(t => t.id !== section.id)
-    }
-
 </script>
 
 <div>

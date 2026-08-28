@@ -12,8 +12,8 @@
 
 
   const { isGM } = OBRHelper;
-  $: mainSheetVisible = $currentPlayerId === $viewingPlayerId ? "display:block;" : "display:none;";
-  $: viewingSheetVisible = $currentPlayerId === $viewingPlayerId ? "display:none;" : "display:block";
+  let mainSheetVisible = $derived($currentPlayerId === $viewingPlayerId ? "display:block;" : "display:none;");
+  let viewingSheetVisible = $derived($currentPlayerId === $viewingPlayerId ? "display:none;" : "display:block");
 
   onMount(() => {
     if (OBR.isAvailable) {

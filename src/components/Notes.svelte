@@ -1,10 +1,13 @@
 <script lang="ts">
     import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper";
 
+    interface Props {
+        notes: string;
+    }
 
-    export let notes;
+    let { notes = $bindable() }: Props = $props();
 
-    $: editable = $currentPlayerId === $viewingPlayerId; 
+    let editable = $derived($currentPlayerId === $viewingPlayerId);
 
 </script>
 
@@ -35,7 +38,7 @@
         padding: 1rem 0.5rem;
         border-width: 0.15rem;
         border-style: solid;
-        border-image: 
+        border-image:
         linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(var(--accent)), rgba(0, 0, 0, 0)) 1 100%;
         border-right: none;
     }

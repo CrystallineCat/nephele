@@ -2,23 +2,28 @@
     // Import store
     import { sheet } from '../stores'
 
-    let saveFile: FileList | undefined;
+    let saveFile: FileList | undefined = $state();
 
     function importFile (){
-        document.getElementById('importFile').click();
+        document.getElementById('importFile')?.click();
     }
-    function storeFile(e){
+    function storeFile(e: Event){
+        const input = e.target as HTMLInputElement;
+        const file = input.files?.[0];
+        if (!file) return;
         var reader = new FileReader();
-        reader.onload = function(e) {
-            let jsonObj = JSON.parse(e.target.result.toString());
+        reader.onload = function(ev) {
+            const result = ev.target?.result;
+            if (typeof result !== 'string') return;
+            let jsonObj = JSON.parse(result);
             $sheet = jsonObj;
         }
-        reader.readAsText(e.target.files[0]);
+        reader.readAsText(file);
     }
 </script>
 
-<input id="importFile" type="file" accept="application/json" on:change={e => storeFile(e)} bind:value={saveFile}/>
-<button on:click={importFile}>Import</button>
+<input id="importFile" type="file" accept="application/json" onchange={storeFile} bind:value={saveFile}/>
+<button onclick={importFile}>Import</button>
 
 <style lang="scss">
     input[type="file"] {

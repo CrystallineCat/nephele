@@ -1,22 +1,22 @@
 <script lang="ts">
 import { currentPlayerName, currentPlayerId, PartyStore, viewingPlayerId, ViewingSheet} from '../services/OBRHelper';
 
-function changeViewingSheet(playerId) {
+function changeViewingSheet(playerId: string) {
     $viewingPlayerId = playerId;
 }
 </script>
 
 <ul>
     {#if $viewingPlayerId === $currentPlayerId}
-    <li class="active"><button on:click={() => changeViewingSheet($currentPlayerId)}>{$currentPlayerName} &#9734;</button></li>
+    <li class="active"><button onclick={() => changeViewingSheet($currentPlayerId)}>{$currentPlayerName} &#9734;</button></li>
     {:else}
-    <li><button on:click={() => changeViewingSheet($currentPlayerId)}>{$currentPlayerName} &#9734;</button></li>
+    <li><button onclick={() => changeViewingSheet($currentPlayerId)}>{$currentPlayerName} &#9734;</button></li>
     {/if}
     {#each $PartyStore as player}
         {#if player.id === $viewingPlayerId}
-        <li role="tab" class="active"><button on:click={() => changeViewingSheet(player.id)}>{player.name}</button></li>
+        <li role="tab" class="active"><button onclick={() => changeViewingSheet(player.id)}>{player.name}</button></li>
         {:else}
-        <li role="tab"><button on:click={() => changeViewingSheet(player.id)}>{player.name}</button></li>
+        <li role="tab"><button onclick={() => changeViewingSheet(player.id)}>{player.name}</button></li>
         {/if}
     {/each}
 </ul>

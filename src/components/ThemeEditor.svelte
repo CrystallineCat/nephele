@@ -3,29 +3,29 @@
     import { theme } from '../stores'
     import { editing } from '../stores';
 
-    $:shadowChecked = ($theme.textShadow === "1px 1px 2px #000000" ? true : false);
-    $:primaryHex = rgbToHex($theme.primary);
-    $:secondaryHex = rgbToHex($theme.secondary);
-    $:accentHex = rgbToHex($theme.accent);
-    
-    function updateColor(ev) {
-        const color = ev.target.value;
-        const name = ev.target.name;
+    let shadowChecked = $state($theme.textShadow === "1px 1px 2px #000000");
+    let primaryHex = $derived(rgbToHex($theme.primary));
+    let secondaryHex = $derived(rgbToHex($theme.secondary));
+    let accentHex = $derived(rgbToHex($theme.accent));
+
+    function updateColor(ev: Event) {
+        const target = ev.target as HTMLInputElement;
+        const color = target.value;
+        const name = target.name;
         let rgb = parseInt(color.slice(1), 16);
         let r = (rgb & 0xff0000) >> 16;
         let g = (rgb & 0x00ff00) >> 8;
 	    let b = (rgb & 0x0000ff) >> 0;
-        $theme[name] = r + "," + g + "," + b;
+        ($theme as Record<string, string>)[name] = r + "," + g + "," + b;
     }
-    
-    function rgbToHex(rgb) {
-        var rgb = rgb.split( ',' );
+
+    function rgbToHex(rgb: string) {
         let hex = "#";
-        rgb.forEach(function(c){
-            c = parseInt(c);
-            c = c.toString(16)
-            c = c.length === 1 ? '0' + c : c
-            hex = hex + c.toString();
+        rgb.split(',').forEach(function(part){
+            let c = parseInt(part);
+            let s = c.toString(16);
+            s = s.length === 1 ? '0' + s : s;
+            hex = hex + s;
         });
         return hex;
     }
@@ -37,14 +37,12 @@
             $theme.textShadow = "none"
         }
     }
-
-     
 </script>
 {#if $editing}
-<input type="color" name="primary" value={primaryHex} on:input={updateColor}/>
-<input type="color" name="secondary" value={secondaryHex} on:input={updateColor}/>
-<input type="color" name="accent" value={accentHex} on:input={updateColor}/>
-<input type="checkbox" name="shadow" bind:checked={shadowChecked} on:input={updateShadow}/>
+<input type="color" name="primary" value={primaryHex} oninput={updateColor}/>
+<input type="color" name="secondary" value={secondaryHex} oninput={updateColor}/>
+<input type="color" name="accent" value={accentHex} oninput={updateColor}/>
+<input type="checkbox" name="shadow" bind:checked={shadowChecked} oninput={updateShadow}/>
 {/if}
 
 <style lang="scss">
@@ -65,6 +63,6 @@
             background:var(--accent);
         }
     }
-    
+
 
 </style>
