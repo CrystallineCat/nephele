@@ -2,12 +2,11 @@
 import { editing } from "../stores"
 import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper"
 
-import RemoveStat from "./RemoveStat.svelte"
 import AddStat from "./AddStat.svelte"
-import type { DummySheetStats } from "../types/sheet.type"
+import type { ThemeCard } from "../types/sheet.type"
 
 interface Props {
-    stats: DummySheetStats[]
+    stats: ThemeCard[]
 }
 
 let { stats = $bindable() }: Props = $props()
@@ -18,16 +17,9 @@ let newStatId = $derived(
 let editable = $derived($currentPlayerId === $viewingPlayerId)
 
 function addStat() {
-    stats = [
-        ...stats,
-        {
-            id: newStatId,
-            name: "New Field",
-            value: "-",
-        },
-    ]
+    stats = [...stats]
 }
-function removeStat(stat: DummySheetStats) {
+function removeStat(stat: ThemeCard) {
     stats = stats.filter((t) => t.id !== stat.id)
 }
 </script>
@@ -35,24 +27,7 @@ function removeStat(stat: DummySheetStats) {
 <table>
     <tbody>
         {#each stats as stat (stat.id)}
-            <tr>
-                {#if editable && $editing}
-                    <td contenteditable="true" bind:innerText={stat.name}></td>
-                {:else}
-                    <td>{stat.name}</td>
-                {/if}
-                {#if editable}
-                    <td contenteditable="true" bind:innerText={stat.value}></td>
-                {:else}
-                    <td>{stat.value}</td>
-                {/if}
-
-                {#if editable && $editing}
-                    <td style="width:0.5rem;"
-                        ><RemoveStat {stat} {removeStat} /></td
-                    >
-                {/if}
-            </tr>
+            <tr> </tr>
         {/each}
     </tbody>
 </table>

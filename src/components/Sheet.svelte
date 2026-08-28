@@ -1,10 +1,9 @@
 <script lang="ts">
 import Sections from "./Sections.svelte"
 import SheetActions from "./SheetActions.svelte"
-import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper"
 import type { DummySheet } from "../types/sheet.type"
 
-import { editing } from "../stores"
+import Editable from "./Editable.svelte"
 
 interface Props {
     sheet: DummySheet
@@ -12,19 +11,14 @@ interface Props {
 
 let { sheet = $bindable() }: Props = $props()
 
-let editable = $derived($currentPlayerId === $viewingPlayerId)
 let player = $state("")
 </script>
 
 <div>
-    {#if editable && $editing}
-        <h1 bind:innerText={sheet.name} contenteditable="true"></h1>
-    {:else}
-        <h1>{sheet.name}</h1>
-    {/if}
-    <h4>{player}</h4>
+    <h1><Editable bind:text={sheet.name} /></h1>
+    <h2>{player ?? "Player"}</h2>
     <SheetActions />
-    <Sections bind:sections={sheet.sections} />
+    <Sections bind:themeCards={sheet.themeCards} />
 </div>
 
 <style>
@@ -40,7 +34,7 @@ h1 {
     color: rgb(var(--accent));
     text-align: right;
 }
-h4 {
+h2 {
     font-weight: 300;
     margin: 0;
     color: rgb(var(--accent));

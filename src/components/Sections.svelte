@@ -1,17 +1,17 @@
 <script lang="ts">
 import Section from "./Section.svelte"
-import type { DummySheetSection } from "../types/sheet.type"
+import type { ThemeCard } from "../types/sheet.type"
 
 interface Props {
-    sections?: DummySheetSection[]
+    themeCards?: ThemeCard[]
 }
 
-let { sections = $bindable([]) }: Props = $props()
+let { themeCards = $bindable([]) }: Props = $props()
 </script>
 
 <div>
-    {#each sections as section, i (section.id)}
-        <Section bind:section={sections[i]} />
+    {#each themeCards as _, i}
+        <Section bind:themeCard={themeCards[i]} />
     {/each}
 </div>
 

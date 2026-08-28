@@ -1,17 +1,17 @@
 export type DummySheet = {
     id: number
     name: string
-    sections: Array<DummySheetSection>
+    themeCards: ThemeCard[]
 }
 
-export type DummySheetSection = {
+export type ThemeCard = {
     id: number
-    name: string
-    stats: Array<DummySheetStats>
-}
-
-export type DummySheetStats = {
-    id: number
-    name: string
-    value: string
+    tier: "origin" | "adventure" | "greatness"
+    kind: string
+    tags: {
+        title: string
+        positive: string[]
+        negative: string[]
+    }
+    quest: string
 }

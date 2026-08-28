@@ -1,32 +1,27 @@
 <script lang="ts">
 import Stats from "./Stats.svelte"
 
-import { editing } from "../stores"
-import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper"
-import type { DummySheetSection } from "../types/sheet.type"
+import type { ThemeCard } from "../types/sheet.type"
+import Editable from "./Editable.svelte"
 
 interface Props {
-    section: DummySheetSection
+    themeCard: ThemeCard
 }
 
-let { section = $bindable() }: Props = $props()
-
-let editable = $derived($currentPlayerId === $viewingPlayerId)
+let { themeCard = $bindable() }: Props = $props()
 </script>
 
-<div>
-    {#if editable && $editing}
-        <h2 bind:innerText={section.name} contenteditable="true">
-            {section.name}
-        </h2>
-    {:else}
-        <h2>{section.name}</h2>
-    {/if}
-    <Stats bind:stats={section.stats} />
-</div>
+<section class="sheet">
+    <h1>
+        <Editable bind:text={themeCard.tags.title} />
+    </h1>
+    <!--<Stats bind:stats={section.stats} />-->
+
+    <Editable bind:text={themeCard.quest} />
+</section>
 
 <style>
-div {
+.sheet {
     padding: 1rem 0.5rem;
     border-width: 0.15rem;
     border-style: solid;
@@ -38,12 +33,13 @@ div {
         )
         1 100%;
     border-right: none;
-}
-h2 {
-    text-shadow: var(--shadow);
-    color: rgb(var(--accent));
-    font-size: 1.2rem;
-    margin-top: 0;
-    margin-bottom: 0;
+
+    h1 {
+        text-shadow: var(--shadow);
+        color: rgb(var(--accent));
+        font-size: 1.2rem;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
 }
 </style>

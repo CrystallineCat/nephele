@@ -1,144 +1,54 @@
 import { writable } from "svelte/store"
 import { localStore } from "./localStore"
+import type { DummySheet } from "./types/sheet.type"
 
-const initialSheet = {
+const initialSheet: DummySheet = {
     id: 1,
-    name: "Example Sheet",
-    sections: [
+    name: "Karima",
+    themeCards: [
         {
             id: 1,
-            name: "Character",
-            stats: [
-                {
-                    id: 1,
-                    name: "Name",
-                    value: "Karima",
-                },
-            ],
+            tier: "origin",
+            kind: "devotion",
+            tags: {
+                title: "Communities Engineer",
+                positive: ["walk in their shoes", "there is another way"],
+                negative: ["new at this"],
+            },
+            quest: "Can I advocate for the outcast?",
         },
         {
             id: 2,
-            name: "Devotion",
-            stats: [
-                {
-                    id: 1,
-                    name: "Title",
-                    value: "Communities Engineer",
-                },
-                {
-                    id: 2,
-                    name: "Skill 1",
-                    value: "walk in their shoes",
-                },
-                {
-                    id: 3,
-                    name: "Skill 2",
-                    value: "there is another way",
-                },
-                {
-                    id: 4,
-                    name: "Weakness",
-                    value: "new at this",
-                },
-                {
-                    id: 5,
-                    name: "Quest",
-                    value: "Can I advocate for the outcast?",
-                },
-            ],
+            tier: "origin",
+            kind: "personality",
+            tags: {
+                title: "Kind",
+                positive: ["make someone happy", "soothe fears"],
+                negative: ["don't want to take sides"],
+            },
+            quest: "I must treat everyone with kindness!",
         },
         {
             id: 3,
-            name: "Personality",
-            stats: [
-                {
-                    id: 1,
-                    name: "Title",
-                    value: "Kind",
-                },
-                {
-                    id: 2,
-                    name: "Skill 1",
-                    value: "make someone happy",
-                },
-                {
-                    id: 3,
-                    name: "Skill 2",
-                    value: "soothe fears",
-                },
-                {
-                    id: 4,
-                    name: "Weakness",
-                    value: "don't want to take sides",
-                },
-                {
-                    id: 5,
-                    name: "Quest",
-                    value: "I must treat everyone with kindness!",
-                },
-            ],
+            tier: "origin",
+            kind: "possession",
+            tags: {
+                title: "Moonlight Cafe",
+                positive: ["exotic beverages", "cozy space"],
+                negative: ["small"],
+            },
+            quest: "Can I give creatures a home?",
         },
         {
             id: 4,
-            name: "Possession",
-            stats: [
-                {
-                    id: 1,
-                    name: "Title",
-                    value: "Moonlight Cafe",
-                },
-                {
-                    id: 2,
-                    name: "Skill 1",
-                    value: "exotic beverages",
-                },
-                {
-                    id: 3,
-                    name: "Skill 2",
-                    value: "cozy space",
-                },
-                {
-                    id: 4,
-                    name: "Weakness",
-                    value: "small",
-                },
-                {
-                    id: 5,
-                    name: "Quest",
-                    value: "Can I give creatures a home?",
-                },
-            ],
-        },
-        {
-            id: 5,
-            name: "Magic",
-            stats: [
-                {
-                    id: 1,
-                    name: "Title",
-                    value: "Hospitality Magic",
-                },
-                {
-                    id: 2,
-                    name: "Skill 1",
-                    value: "cast off the outside",
-                },
-                {
-                    id: 3,
-                    name: "Skill 2",
-                    value: "reveal your joy",
-                },
-                {
-                    id: 4,
-                    name: "Weakness",
-                    value: "no privacy",
-                },
-                {
-                    id: 5,
-                    name: "Quest",
-                    value: "What do my guests need?",
-                },
-            ],
+            tier: "origin",
+            kind: "magic",
+            tags: {
+                title: "Hospitality Magic",
+                positive: ["cast off the outside", "reveal your joy"],
+                negative: ["no privacy"],
+            },
+            quest: "What do my guests need?",
         },
     ],
 }
