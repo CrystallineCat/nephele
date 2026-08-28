@@ -35,7 +35,7 @@ All deps go to latest in one move, including `typescript@7.0.2` despite
 suspected svelte-check incompatibility. Breakage is treated as a finding
 to fix, not a reason to pre-emptively pin.
 
-- *Alternative considered:* pin TS at 5.9.x until svelte-check catches
+- _Alternative considered:_ pin TS at 5.9.x until svelte-check catches
   up. Rejected by the user — now is the cheapest time to discover the
   real incompatibility surface. If TS 7 proves unworkable, the pin
   becomes the documented fix inside this change, not a silent fallback.
@@ -58,7 +58,7 @@ examples. Mapping:
 - The `bind:innerText` contenteditable title (one of the 5 baseline
   errors) is re-typed during migration; behavior preserved.
 
-- *Alternative considered:* stay on legacy mode, migrate lazily.
+- _Alternative considered:_ stay on legacy mode, migrate lazily.
   Rejected — a first-time Svelte maintainer should learn one syntax,
   and the migration is small (19 files, all simple).
 
@@ -68,7 +68,7 @@ Stores remain fully supported in Svelte 5, and `$store`
 auto-subscription works inside runes components. `localStore` (the
 localStorage persistence wrapper) stays untouched.
 
-- *Alternative considered:* re-architect state as `.svelte.ts` rune
+- _Alternative considered:_ re-architect state as `.svelte.ts` rune
   modules. Rejected — a re-architecture, not a syntax migration; adds
   behavioral risk to a change whose acceptance criterion is "no
   functional delta."
@@ -96,14 +96,15 @@ diffs — no custom config cleverness.
   unresolvable, pin `typescript@~5.9` and record the deviation in this
   design + proposal (the only accepted exception to latest-everything).
 
-  **Resolution (implemented):** TS 7 *was* rejected — svelte-check@4.7.6
-  declares peer `typescript@^5.0.0 || ^6.0.0`. Rather than the
-  pre-written `~5.9` fallback, the project landed on **`typescript@6.0.3`**
-  — the newest release line svelte-check accepts (6.x did not exist in
-  the author's knowledge when the fallback was drafted). `npm run check`
-  runs clean on 6.0.3, so the contingency resolved at a newer version
-  than planned. This is the single accepted deviation from
-  latest-everything; everything else is at its true latest.
+    **Resolution (implemented):** TS 7 _was_ rejected — svelte-check@4.7.6
+    declares peer `typescript@^5.0.0 || ^6.0.0`. Rather than the
+    pre-written `~5.9` fallback, the project landed on **`typescript@6.0.3`**
+    — the newest release line svelte-check accepts (6.x did not exist in
+    the author's knowledge when the fallback was drafted). `npm run check`
+    runs clean on 6.0.3, so the contingency resolved at a newer version
+    than planned. This is the single accepted deviation from
+    latest-everything; everything else is at its true latest.
+
 - [OBR SDK 3 changed the player/party API surface] → adapt per
   changelog; worst case the app still renders standalone because the
   `OBR.isAvailable` gate isolates all SDK calls. Cannot block the

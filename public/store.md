@@ -5,7 +5,7 @@ author: kurara ara
 image: https://www.dummysheet.com/hero.png
 icon: https://www.dummysheet.com/icon.svg
 tags:
-  - tool
+    - tool
 manifest: https://www.dummysheet.com/manifest.json
 learn-more: https://github.com/kurara-ara/dummy-sheet
 ---

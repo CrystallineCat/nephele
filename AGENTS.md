@@ -8,9 +8,12 @@ persisted to localStorage; Owlbear Rodeo integration via
 
 ## Commands
 
-- `npm run dev` — vite dev server
+- `npm run dev` — vite dev server (watches + hot-reloads; HMR events go to
+  the browser console, not the terminal)
 - `npm run check` — svelte-check; run after TS/Svelte changes, must pass clean
 - `npm run build` — production build
+- `npm run format` — prettier --write (canonical formatting; run after edits)
+- `npm run format:check` — prettier --check (verify without writing)
 
 ## OpenSpec
 

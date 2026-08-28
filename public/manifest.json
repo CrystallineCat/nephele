@@ -7,10 +7,10 @@
     "description": "A dummy-simple customisable character sheet.",
     "homepage_url": "https://www.dummysheet.com",
     "action": {
-      "title": "DummySheet",
-      "icon": "/icon.svg",
-      "popover": "/",
-      "height": 1200,
-      "width": 700
+        "title": "DummySheet",
+        "icon": "/icon.svg",
+        "popover": "/",
+        "height": 1200,
+        "width": 700
     }
-  }
+}

@@ -1,51 +1,56 @@
 <script lang="ts">
-    // Import components
-    import Stats from './Stats.svelte'
-    import RemoveSection from './RemoveSection.svelte';
+// Import components
+import Stats from "./Stats.svelte"
+import RemoveSection from "./RemoveSection.svelte"
 
-    // Import Stores
-    import { editing } from '../stores';
-    import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper";
-    import type { DummySheetSection } from '../types/sheet.type';
+// Import Stores
+import { editing } from "../stores"
+import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper"
+import type { DummySheetSection } from "../types/sheet.type"
 
-    interface Props {
-        section: DummySheetSection;
-        removeSection: (section: DummySheetSection) => void;
-    }
+interface Props {
+    section: DummySheetSection
+    removeSection: (section: DummySheetSection) => void
+}
 
-    let { section = $bindable(), removeSection }: Props = $props();
+let { section = $bindable(), removeSection }: Props = $props()
 
-    let editable = $derived($currentPlayerId === $viewingPlayerId);
-
+let editable = $derived($currentPlayerId === $viewingPlayerId)
 </script>
 
 <div>
     {#if editable && $editing}
-
-    <h2 bind:innerText={section.name} contenteditable="true">{section.name}</h2>
+        <h2 bind:innerText={section.name} contenteditable="true">
+            {section.name}
+        </h2>
     {:else}
-    <h2>{section.name}</h2>
+        <h2>{section.name}</h2>
     {/if}
-    <Stats bind:stats={section.stats}/>
+    <Stats bind:stats={section.stats} />
     {#if editable && $editing}
-    <RemoveSection section={section} removeSection={removeSection}/>
+        <RemoveSection {section} {removeSection} />
     {/if}
 </div>
 
 <style lang="scss">
-    div {
-        padding: 1rem 0.5rem;
-        border-width: 0.15rem;
-        border-style: solid;
-        border-image:
-        linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(var(--accent)), rgba(0, 0, 0, 0)) 1 100%;
-        border-right: none;
-    }
-    h2 {
-        text-shadow: var(--shadow);
-        color: rgb(var(--accent));
-        font-size: 1.2rem;
-        margin-top:0;
-        margin-bottom:0;
-    }
+div {
+    padding: 1rem 0.5rem;
+    border-width: 0.15rem;
+    border-style: solid;
+    border-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0),
+            rgb(var(--accent)),
+            rgba(0, 0, 0, 0)
+        )
+        1 100%;
+    border-right: none;
+}
+h2 {
+    text-shadow: var(--shadow);
+    color: rgb(var(--accent));
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 0;
+}
 </style>
