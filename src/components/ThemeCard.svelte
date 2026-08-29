@@ -12,6 +12,7 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
 
 <section class={{ "theme-card": true, editing: isEditing }}>
     <h1>
+        {@render makeCounter("improve", "⏺", [1, 2, 3])}
         <Editable bind:text={themeCard.kind} {isEditing} />
     </h1>
 
@@ -22,7 +23,9 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
     </table>
 
     <section class="quest">
+        {@render makeCounter("abandon", "⟨", [3, 2, 1])}
         <Editable bind:text={themeCard.quest} {isEditing} />
+        {@render makeCounter("milestone", "⟩", [1, 2, 3])}
     </section>
 </section>
 
@@ -48,30 +51,71 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
     </tr>
 {/snippet}
 
+{#snippet makeCounter(
+    name: "improve" | "abandon" | "milestone",
+    symbol: string,
+    order: number[],
+)}
+    <button
+        class={[name, "counter"]}
+        onclick={() =>
+            (themeCard.counters[name] = (themeCard.counters[name] + 1) % 4)}
+        >{#each order as i}<span
+                class={{ active: themeCard.counters[name] >= i }}>{symbol}</span
+            >{/each}</button
+    >
+{/snippet}
+
 <style>
 .theme-card {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    padding: 0.25rem;
+    gap: 0.1em;
+    padding: 0.25em;
     position: relative;
     border: 2px solid oklch(70% 25% 160deg);
     background: oklch(99% 1% 20deg);
-    width: clamp(12rem, 50%, 18rem);
+
+    button {
+        border: none;
+        background: none;
+        font-size: inherit;
+
+        &.counter {
+            font-size: 1.25em;
+
+            span {
+                &:not(.active) {
+                    opacity: 15%;
+                }
+
+                &.active {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
 
     h1 {
         text-align: center;
         margin: 0;
         font-family: "Merriweather Sans", sans-serif;
-        font-size: 1rem;
-        font-weight: bold;
+        font-size: inherit;
+        font-weight: normal;
         font-variant: small-caps;
+        text-transform: capitalize;
         color: oklch(50% 50% 160deg);
 
         :global(div)::after {
             content: "🌿";
             font-family: "Noto Emoji";
             float: right;
+        }
+
+        button {
+            float: left;
+            width: 0;
+            color: inherit;
         }
     }
 
@@ -82,19 +126,17 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
     th {
         text-align: center;
         font-weight: normal;
-        padding: 0.05rem 1rem;
+        padding: 0.05em 1em;
     }
 
     td {
         position: absolute;
-        right: 1.5rem;
+        right: 3ch;
         width: 0;
 
         button {
             font-family: "Noto Emoji";
-            opacity: 30%;
-            border: none;
-            background: none;
+            opacity: 15%;
         }
     }
 
@@ -113,21 +155,23 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
     }
 
     tr.title th {
-        font-size: 1.2rem;
-        padding-bottom: 0.25rem;
+        font-size: 1.1em;
+        font-weight: bold;
+        text-transform: capitalize;
+        padding-bottom: 0.2em;
     }
 
     tr.negative th {
         :global(::before) {
-            color: oklch(50% 50% 160deg);
-            font-weight: bold;
-            content: "⟨ ";
+            content: "⟪";
+            padding-right: 0.2ch;
+            opacity: 50%;
         }
 
         :global(::after) {
-            color: oklch(50% 50% 160deg);
-            font-weight: bold;
-            content: " ⟩";
+            content: "⟫";
+            padding-left: 0.2ch;
+            opacity: 50%;
         }
     }
 
@@ -135,8 +179,16 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
         border-top: 1px solid oklch(70% 25% 160deg);
         text-align: center;
         font-style: italic;
-        margin: 0.5rem;
-        padding-top: 0.75rem;
+        margin: 0.5em -0.25em;
+        padding-top: 1em;
+        display: grid;
+        grid-template-columns: min-content auto min-content;
+        height: 100%;
+
+        :global(.editable) {
+            height: min-content;
+            place-self: center;
+        }
     }
 }
 </style>

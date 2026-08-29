@@ -6,62 +6,65 @@ const tag = (
     isTitle: boolean = false,
 ) => ({ name, isScratched: false, isTitle, isNegative })
 
-const tags = (names: string[]) => [
-    tag(names[0], false, true),
-    tag(names[1]),
-    tag(names[2]),
-    tag(""),
-    tag(""),
-    tag(names[3], true),
-    tag("", true),
-]
+const theme = (kind: string, tags: string[], quest: string) => ({
+    tier: "origin" as "origin",
+    kind,
+    tags: [
+        tag(tags[0], false, true),
+        tag(tags[1]),
+        tag(tags[2]),
+        tag(tags[3], true),
+    ],
+    quest,
+    counters: {
+        improve: 0,
+        abandon: 0,
+        milestone: 0,
+    },
+})
 
 export const sheet: CharacterSheet = $state({
     name: "Karima",
     themeCards: [
-        {
-            tier: "origin",
-            kind: "devotion",
-            tags: tags([
+        theme(
+            "devotion",
+            [
                 "Communities Engineer",
                 "walk in their shoes",
                 "there is another way",
                 "new at this",
-            ]),
-            quest: "Can I advocate for the outcast?",
-        },
-        {
-            tier: "origin",
-            kind: "personality",
-            tags: tags([
+            ],
+            "Can I advocate for the marginalized?",
+        ),
+        theme(
+            "personality",
+            [
                 "Kind",
                 "make someone happy",
                 "soothe fears",
                 "don't want to take sides",
-            ]),
-            quest: "I must treat everyone with kindness!",
-        },
-        {
-            tier: "origin",
-            kind: "possession",
-            tags: tags([
+            ],
+            "I must treat everyone with kindness!",
+        ),
+        theme(
+            "possession",
+            [
                 "Moonlight Cafe",
                 "exotic beverages",
                 "cozy space",
                 "small",
-            ]),
-            quest: "Can I give creatures a home?",
-        },
-        {
-            tier: "origin",
-            kind: "magic",
-            tags: tags([
+            ],
+            "Can I give small unfortunate creatures a home?",
+        ),
+        theme(
+            "magic",
+            [
                 "Hospitality Magic",
                 "cast off the outside",
                 "reveal your joy",
                 "no privacy",
-            ]),
-            quest: "What do my guests need?",
-        },
+            ],
+            "What do my guests need?",
+        ),
     ],
 })

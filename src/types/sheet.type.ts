@@ -8,6 +8,11 @@ export type ThemeCard = {
     kind: string
     tags: Tag[]
     quest: string
+    counters: {
+        improve: number
+        abandon: number
+        milestone: number
+    }
 }
 
 export type Tag = {

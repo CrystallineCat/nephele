@@ -32,42 +32,27 @@ let isEditing = $state(false)
 
 <style>
 .sheet {
+    font-size: 12px;
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
 
     h1 {
-        margin: 1rem 0 0 1rem;
-        color: rgb(var(--accent));
-        text-align: right;
-    }
-
-    h2 {
-        font-weight: 300;
-        margin: 0;
-        color: rgb(var(--accent));
-        text-align: right;
-    }
-
-    main {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        grid-template-rows: repeat(1, 1fr);
-        grid-column-gap: 1.5rem;
-        grid-row-gap: 2rem;
+        text-align: left;
     }
 
     aside {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
         display: flex;
-        flex-wrap: wrap;
-        grid-gap: 0.5rem;
-        grid-auto-flow: column;
-        width: 100%;
-        justify-content: end;
+        gap: 0.5rem;
+        place-content: end;
+    }
+
+    main {
+        display: contents;
     }
 }
 </style>
