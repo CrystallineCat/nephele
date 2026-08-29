@@ -32,7 +32,6 @@ let isEditing = $state(false)
 
 <style>
 .sheet {
-    font-size: 12px;
     width: 90%;
     margin-left: auto;
     margin-right: auto;

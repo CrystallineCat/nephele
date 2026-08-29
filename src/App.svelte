@@ -19,5 +19,8 @@ import { sheet } from "./sheet.svelte"
     padding: 0;
     margin: 0;
     overflow-y: scroll;
+    display: grid;
+    place-items: top center;
+    background: oklch(99% 1% 20deg);
 }
 </style>

@@ -74,7 +74,9 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
     padding: 0.25em;
     position: relative;
     border: 2px solid oklch(70% 25% 160deg);
-    background: oklch(99% 1% 20deg);
+    background: oklch(99.9% 1% 160deg);
+    box-shadow: 2px 2px 2px gray;
+    border-radius: 1ch;
 
     button {
         border: none;
@@ -100,7 +102,7 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
         text-align: center;
         margin: 0;
         font-family: "Merriweather Sans", sans-serif;
-        font-size: inherit;
+        font-size: 80%;
         font-weight: normal;
         font-variant: small-caps;
         text-transform: capitalize;

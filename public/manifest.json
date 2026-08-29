@@ -5,7 +5,7 @@
     "icon": "/icon.svg",
     "author": "Magdalena Kiesel",
     "description": "A simple Legend in the Mist character sheet",
-    "homepage_url": "",
+    "homepage_url": "https://github.com/CrystallineCat/nephele",
     "action": {
         "title": "Nephele",
         "icon": "/icon.svg",
