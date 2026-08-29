@@ -1,5 +1,3 @@
-import { writable } from "svelte/store"
-import { localStore } from "./localStore"
 import type { CharacterSheet } from "./types/sheet.type"
 
 const tag = (
@@ -18,7 +16,7 @@ const tags = (names: string[]) => [
     tag("", true),
 ]
 
-const initialSheet: CharacterSheet = {
+export const sheet: CharacterSheet = $state({
     name: "Karima",
     themeCards: [
         {
@@ -66,7 +64,4 @@ const initialSheet: CharacterSheet = {
             quest: "What do my guests need?",
         },
     ],
-}
-
-export const editing = writable(false)
-export const sheet = localStore("dummy-sheet", initialSheet)
+})

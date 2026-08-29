@@ -9,7 +9,7 @@ interface Props {
     sheet: CharacterSheet
 }
 
-let { sheet = $bindable() }: Props = $props()
+let { sheet }: Props = $props()
 let isEditing = $state(false)
 </script>
 
