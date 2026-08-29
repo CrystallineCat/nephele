@@ -1,23 +1,31 @@
 <script lang="ts">
-import { editing } from "../stores"
-import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper"
-
-interface Props {
-    addStat: () => void
-}
-
-let { addStat }: Props = $props()
-
-let editable = $derived($currentPlayerId === $viewingPlayerId)
+let { value = $bindable(), renderTrue, renderFalse } = $props()
 </script>
 
-{#if editable && $editing}
-    <button onclick={addStat}> Add Stat </button>
-{/if}
+<button
+    onclick={() => {
+        value = !value
+    }}
+>
+    {#if value}
+        {#if renderTrue}
+            {@render renderTrue()}
+        {:else}
+            on
+        {/if}
+    {:else}
+        {#if renderFalse}
+            {@render renderFalse()}
+        {:else}
+            off
+        {/if}
+    {/if}
+</button>
 
 <style>
 button {
-    width: 100%;
+    margin-right: 0px;
+    float: right;
     background: rgba(var(--accent), 0);
     border: 1px solid rgb(var(--accent));
     border-radius: 0.15rem;

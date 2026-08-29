@@ -1,13 +1,13 @@
 {
-    "name": "DummySheet",
+    "name": "Nephele",
     "version": "1.0.0",
     "manifest_version": 1,
     "icon": "/icon.svg",
-    "author": "kurara ara",
-    "description": "A dummy-simple customisable character sheet.",
-    "homepage_url": "https://www.dummysheet.com",
+    "author": "Magdalena Kiesel",
+    "description": "A simple Legend in the Mist character sheet",
+    "homepage_url": "",
     "action": {
-        "title": "DummySheet",
+        "title": "Nephele",
         "icon": "/icon.svg",
         "popover": "/",
         "height": 1200,

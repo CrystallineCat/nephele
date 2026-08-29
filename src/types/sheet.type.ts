@@ -1,17 +1,18 @@
-export type DummySheet = {
-    id: number
+export type CharacterSheet = {
     name: string
     themeCards: ThemeCard[]
 }
 
 export type ThemeCard = {
-    id: number
     tier: "origin" | "adventure" | "greatness"
     kind: string
-    tags: {
-        title: string
-        positive: string[]
-        negative: string[]
-    }
+    tags: Tag[]
     quest: string
+}
+
+export type Tag = {
+    name: string
+    isScratched: boolean
+    isNegative: boolean
+    isTitle: boolean
 }

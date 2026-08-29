@@ -1,62 +1,71 @@
 import { writable } from "svelte/store"
 import { localStore } from "./localStore"
-import type { DummySheet } from "./types/sheet.type"
+import type { CharacterSheet } from "./types/sheet.type"
 
-const initialSheet: DummySheet = {
-    id: 1,
+const tag = (
+    name: string,
+    isNegative: boolean = false,
+    isTitle: boolean = false,
+) => ({ name, isScratched: false, isTitle, isNegative })
+
+const tags = (names: string[]) => [
+    tag(names[0], false, true),
+    tag(names[1]),
+    tag(names[2]),
+    tag(""),
+    tag(""),
+    tag(names[3], true),
+    tag("", true),
+]
+
+const initialSheet: CharacterSheet = {
     name: "Karima",
     themeCards: [
         {
-            id: 1,
             tier: "origin",
             kind: "devotion",
-            tags: {
-                title: "Communities Engineer",
-                positive: ["walk in their shoes", "there is another way"],
-                negative: ["new at this"],
-            },
+            tags: tags([
+                "Communities Engineer",
+                "walk in their shoes",
+                "there is another way",
+                "new at this",
+            ]),
             quest: "Can I advocate for the outcast?",
         },
         {
-            id: 2,
             tier: "origin",
             kind: "personality",
-            tags: {
-                title: "Kind",
-                positive: ["make someone happy", "soothe fears"],
-                negative: ["don't want to take sides"],
-            },
+            tags: tags([
+                "Kind",
+                "make someone happy",
+                "soothe fears",
+                "don't want to take sides",
+            ]),
             quest: "I must treat everyone with kindness!",
         },
         {
-            id: 3,
             tier: "origin",
             kind: "possession",
-            tags: {
-                title: "Moonlight Cafe",
-                positive: ["exotic beverages", "cozy space"],
-                negative: ["small"],
-            },
+            tags: tags([
+                "Moonlight Cafe",
+                "exotic beverages",
+                "cozy space",
+                "small",
+            ]),
             quest: "Can I give creatures a home?",
         },
         {
-            id: 4,
             tier: "origin",
             kind: "magic",
-            tags: {
-                title: "Hospitality Magic",
-                positive: ["cast off the outside", "reveal your joy"],
-                negative: ["no privacy"],
-            },
+            tags: tags([
+                "Hospitality Magic",
+                "cast off the outside",
+                "reveal your joy",
+                "no privacy",
+            ]),
             quest: "What do my guests need?",
         },
     ],
-}
-const initialTheme = {
-    primary: "255,255,255",
-    secondary: "42,42,42",
-    accent: "255,213,140",
-    textShadow: "1px 1px 2px #000000",
 }
 
 export const editing = writable(false)

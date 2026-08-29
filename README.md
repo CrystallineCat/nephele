@@ -1,4 +1,7 @@
-# DummySheet
+# Nephele
+
+A dummy-simple sheet for storing character data.
+If you're constantly changing systems, and you don't have time to wait for a nice dev to implement your character sheet, then DummySheet is for you. Open it up, edit your sheet, and get to playing.
 
 ## LLM-use disclosure
 
@@ -23,9 +26,6 @@ tooling is stated plainly:
 
 This section is kept up to date as usage changes. Last reviewed:
 2026-08-28.
-
-A dummy-simple sheet for storing character data.
-If you're constantly changing systems, and you don't have time to wait for a nice dev to implement your character sheet, then DummySheet is for you. Open it up, edit your sheet, and get to playing.
 
 ## How to use
 

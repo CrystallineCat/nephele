@@ -1,17 +1,13 @@
 <script lang="ts">
-import { editing } from "../stores"
-import { currentPlayerId, viewingPlayerId } from "../services/OBRHelper"
-
 interface Props {
     text: string
+    isEditing: boolean
 }
 
-let { text = $bindable() }: Props = $props()
-
-let editable = $derived($currentPlayerId === $viewingPlayerId)
+let { text = $bindable(), isEditing }: Props = $props()
 </script>
 
-{#if editable && $editing}
+{#if isEditing}
     <div
         class="editable editing"
         bind:textContent={text}

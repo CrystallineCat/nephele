@@ -4,11 +4,15 @@ import Sheet from "./components/Sheet.svelte"
 import OBR from "@owlbear-rodeo/sdk"
 
 import { sheet } from "./stores"
-import * as OBRHelper from "./services/OBRHelper"
 
 onMount(() => {
     if (OBR.isAvailable) {
-        OBRHelper.init()
+        sheet.subscribe(function (sheet) {
+            OBR.player.onChange((player) => {
+                player.metadata["nephele"] = sheet
+            })
+            OBR.player.setMetadata({ nephele: sheet })
+        })
     }
 })
 </script>
