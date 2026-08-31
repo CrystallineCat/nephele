@@ -17,6 +17,15 @@ sheet is used.
 - `npm run format` — prettier --write (canonical formatting; run after edits)
 - `npm run format:check` — prettier --check (verify without writing)
 
+## Commits
+
+- Commit messages authored by AI sessions always start with `[LLM] `.
+
+## Style
+
+- All colors are oklch. Greyscale uses `oklch(<L> none none)` — e.g.
+  `oklch(100% none none)`, never `white` or other color names.
+
 ## OpenSpec
 
 This project uses OpenSpec (spec-driven schema). Specs and changes live in

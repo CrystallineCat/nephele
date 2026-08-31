@@ -30,14 +30,14 @@ let { sheet }: Props = $props()
     h1 {
         text-align: left;
         margin: 0;
-        color: white;
+        color: var(--text);
         font-family: "Roboto", "Helvetica", "Arial", sans-serif;
         letter-spacing: 0em;
         font-size: 1.125rem;
         font-weight: bold;
         line-height: 1.75;
         padding: 16px;
-        border-bottom: 1px solid oklch(100% none none / 0.12);
+        border-bottom: 1px solid color-mix(in oklch, var(--text) 12%, transparent);
     }
 
     main {

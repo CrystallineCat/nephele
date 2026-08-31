@@ -5,12 +5,7 @@ experiment phases. AI sessions maintain this file (see AGENTS.md).
 
 ## Now
 
-- **Change 2: OR theming (name TBD at proposal time).** CSS custom
-  properties + bridge module on `OBR.theme.getTheme()`/`onChange`,
-  gated on `OBR.isAvailable`; `color-mix` for the opacity decorations.
-  Fixes the white-on-white local preview without touching the
-  transparent OR background. Sequenced after clean-up so the theming
-  diff stays readable.
+(nothing open)
 
 ## Parked
 
@@ -23,6 +18,11 @@ experiment phases. AI sessions maintain this file (see AGENTS.md).
 
 ## Resolved
 
+- ~~**Change 2: OR theming.**~~ Implemented as `obr-theming`
+  (2026-08-31): CSS variable contract (`--text`/`--accent`/`--bg`),
+  `src/obr.ts` bridge on the OBR theme API, components rewired through
+  the variables, `color-mix` decorations. Standalone preview legible
+  again; popover transparency preserved in OR.
 - ~~**Identity: system-agnostic vs LitM.**~~ Deliberately Legend in
   the Mist, decided 2026-08-31. AGENTS.md, openspec/config.yaml, and
   manifest.json updated to say so; the old "keep it system-agnostic"

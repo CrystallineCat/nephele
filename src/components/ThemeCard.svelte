@@ -73,14 +73,14 @@ let { themeCard = $bindable() }: Props = $props()
     gap: 0.1em;
     padding: 8px;
     position: relative;
-    border-bottom: 1px solid oklch(100% none none / 0.12);
-    color: white;
+    border-bottom: 1px solid color-mix(in oklch, var(--text) 12%, transparent);
+    color: var(--text);
 
     button {
         border: none;
         background: none;
         font-size: inherit;
-        color: white;
+        color: var(--text);
 
         &.counter {
             span {
@@ -98,7 +98,7 @@ let { themeCard = $bindable() }: Props = $props()
         font-size: 80%;
         font-weight: normal;
         text-transform: capitalize;
-        color: oklch(100% 75% 160deg);
+        color: var(--accent);
         opacity: 50%;
     }
 
@@ -162,7 +162,7 @@ let { themeCard = $bindable() }: Props = $props()
 
     .quest {
         font-size: 90%;
-        border-left: 0.5ch solid oklch(67% 33% 160deg);
+        border-left: 0.5ch solid var(--accent);
         padding-left: 12px;
         margin: 12px;
         font-style: italic;
