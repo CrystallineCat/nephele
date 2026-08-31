@@ -12,6 +12,10 @@ export function initObrTheme(): void {
     OBR.onReady(() => {
         const apply = (theme: Theme) => {
             const root = document.documentElement.style
+            root.setProperty(
+                "--lightness",
+                theme.mode == "LIGHT" ? "45%" : "67%",
+            )
             root.setProperty("--text", theme.text.primary)
             root.setProperty("--accent", theme.primary.main)
             root.setProperty("--bg", "transparent")

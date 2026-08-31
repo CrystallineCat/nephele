@@ -1,7 +1,7 @@
 <script lang="ts">
 import type { CharacterSheet } from "../sheet.svelte"
 
-import ThemeCard from "./ThemeCard.svelte"
+import Theme from "./Theme.svelte"
 
 interface Props {
     sheet: CharacterSheet
@@ -14,8 +14,8 @@ let { sheet }: Props = $props()
     <h1>{sheet.name}</h1>
 
     <main>
-        {#each sheet.themeCards as _, i}
-            <ThemeCard bind:themeCard={sheet.themeCards[i]} />
+        {#each sheet.themes as _, i}
+            <Theme theme={sheet.themes[i]} />
         {/each}
     </main>
 </article>
@@ -28,16 +28,13 @@ let { sheet }: Props = $props()
     flex-direction: column;
 
     h1 {
-        text-align: left;
         margin: 0;
         color: var(--text);
-        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-        letter-spacing: 0em;
         font-size: 1.125rem;
-        font-weight: bold;
         line-height: 1.75;
         padding: 16px;
-        border-bottom: 1px solid color-mix(in oklch, var(--text) 12%, transparent);
+        border-bottom: 1px solid
+            color-mix(in oklch, var(--text) 12%, transparent);
     }
 
     main {

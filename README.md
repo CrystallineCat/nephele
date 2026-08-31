@@ -28,7 +28,11 @@ tooling is stated plainly:
   removal of dead code and unused dependencies, type-file
   consolidation, and replacement of emoji glyphs and the app icon with
   Lucide assets). Neither introduced features, game content, sheet
-  layout, or visual design.
+  layout, or visual design. The **theme-kind icon map**
+  (`src/theme-icons.ts`: LitM themebook → Lucide icon lookup and its
+  rendering in the theme title) was also implemented by the assistant,
+  with icon choices proposed by the assistant and approved by the
+  maintainer.
 - **Not LLM-generated:** game content, sheet layout, visual design, and
   any rules text.
 

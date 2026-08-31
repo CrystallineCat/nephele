@@ -1,11 +1,39 @@
 export type CharacterSheet = {
     name: string
-    themeCards: ThemeCard[]
+    themes: CharacterTheme[]
 }
 
-export type ThemeCard = {
-    tier: "origin" | "adventure" | "greatness"
-    kind: string
+export type Might = "origin" | "adventure" | "greatness"
+
+export type Kind =
+    // origin
+    | "circumstance"
+    | "devotion"
+    | "past"
+    | "people"
+    | "personality"
+    | "skill or trade"
+    | "trait"
+    // adventure
+    | "duty"
+    | "influence"
+    | "knowledge"
+    | "prodigious ability"
+    | "relic"
+    | "uncanny being"
+    // greatness
+    | "destiny"
+    | "dominion"
+    | "mastery"
+    | "monstrosity"
+    // variable
+    | "companion"
+    | "magic"
+    | "possessions"
+
+export type CharacterTheme = {
+    might: Might
+    kind: Kind
     tags: Tag[]
     quest: string
     counters: {
@@ -29,7 +57,8 @@ const tag = (
 ) => ({ name, isScratched: false, isTitle, isNegative })
 
 const theme = (
-    kind: string,
+    might: Might,
+    kind: Kind,
     tags: string[],
     quest: string,
     counters: {
@@ -38,7 +67,7 @@ const theme = (
         milestone?: number
     },
 ) => ({
-    tier: "origin" as "origin",
+    might,
     kind,
     tags: [
         tag(tags[0], false, true),
@@ -57,8 +86,9 @@ const theme = (
 
 export const sheet: CharacterSheet = $state({
     name: "Karima",
-    themeCards: [
+    themes: [
         theme(
+            "origin",
             "devotion",
             [
                 "Communities Engineer",
@@ -70,23 +100,26 @@ export const sheet: CharacterSheet = $state({
             {},
         ),
         theme(
+            "adventure",
             "personality",
             [
                 "Kind",
                 "make someone happy",
                 "soothe fears",
-                "I don't want to take sides",
+                "don't want to take sides",
             ],
             "I must treat everyone with kindness!",
             { improve: 1 },
         ),
         theme(
-            "possession",
+            "greatness",
+            "possessions",
             ["Moonlight Cafe", "exotic beverages", "cozy space", "small"],
             "Can I give small unfortunate creatures a home?",
             {},
         ),
         theme(
+            "origin",
             "magic",
             [
                 "Hospitality Magic",

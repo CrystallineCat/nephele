@@ -46,7 +46,7 @@ seam for three small types); a `src/lib/` directory (premature for one
 module — introduce it when the theming bridge or persistence needs a
 non-component home).
 
-Note: `ThemeCard` the *type* and `ThemeCard.svelte` the *component*
+Note: `ThemeCard` the _type_ and `ThemeCard.svelte` the _component_
 share a name. That collision already exists today via the import in
 `ThemeCard.svelte`; keeping the type named `ThemeCard` preserves the
 domain vocabulary. If svelte-check complains, rename the type import
