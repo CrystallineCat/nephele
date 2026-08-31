@@ -11,11 +11,6 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
 </script>
 
 <section class={{ "theme-card": true, editing: isEditing }}>
-    <h1>
-        {@render makeCounter("improve", "⏺", [1, 2, 3])}
-        <Editable bind:text={themeCard.kind} {isEditing} />
-    </h1>
-
     <table>
         {#each themeCard.tags as tag}
             {@render makeTagRow(tag)}
@@ -23,8 +18,9 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
     </table>
 
     <section class="quest">
-        {@render makeCounter("abandon", "⟨", [3, 2, 1])}
         <Editable bind:text={themeCard.quest} {isEditing} />
+        {@render makeCounter("abandon", "⟨", [3, 2, 1])}
+        {@render makeCounter("improve", "⏺", [1, 2, 3])}
         {@render makeCounter("milestone", "⟩", [1, 2, 3])}
     </section>
 </section>
@@ -39,9 +35,12 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
         }}
     >
         <th>
-            <Editable bind:text={tag.name} {isEditing} />
+            {tag.name}
         </th>
-        <td>
+        <td class="kind">
+            {#if tag.isTitle}{themeCard.kind}{/if}
+        </td>
+        <td class="scratch">
             <button
                 onclick={() => {
                     tag.isScratched = !tag.isScratched
@@ -68,73 +67,56 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
 
 <style>
 .theme-card {
+    margin: 0;
     display: flex;
     flex-direction: column;
     gap: 0.1em;
-    padding: 0.25em;
+    padding: 8px;
     position: relative;
-    border: 2px solid oklch(70% 25% 160deg);
-    background: oklch(99.9% 1% 160deg);
-    box-shadow: 2px 2px 2px gray;
-    border-radius: 1ch;
+    border-bottom: 1px solid oklch(100% none none / 0.12);
+    color: white;
 
     button {
         border: none;
         background: none;
         font-size: inherit;
+        color: white;
 
         &.counter {
-            font-size: 1.25em;
-
             span {
+                font-weight: bold;
+
                 &:not(.active) {
                     opacity: 15%;
-                }
-
-                &.active {
-                    font-weight: bold;
                 }
             }
         }
     }
 
-    h1 {
-        text-align: center;
-        margin: 0;
-        font-family: "Merriweather Sans", sans-serif;
+    td.kind {
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
         font-size: 80%;
         font-weight: normal;
-        font-variant: small-caps;
         text-transform: capitalize;
-        color: oklch(50% 50% 160deg);
-
-        :global(div)::after {
-            content: "🌿";
-            font-family: "Noto Emoji";
-            float: right;
-        }
-
-        button {
-            float: left;
-            width: 0;
-            color: inherit;
-        }
+        color: oklch(100% 75% 160deg);
+        opacity: 50%;
     }
 
     table {
+        margin-top: 8px;
         width: 100%;
+        font-size: 90%;
     }
 
     th {
-        text-align: center;
+        text-align: left;
         font-weight: normal;
-        padding: 0.05em 1em;
+        padding: 1px 8px;
     }
 
-    td {
-        position: absolute;
-        right: 3ch;
-        width: 0;
+    td.scratch {
+        float: right;
+        right: 8px;
 
         button {
             font-family: "Noto Emoji";
@@ -152,15 +134,17 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
         }
     }
 
-    &:not(.editing) tr.empty {
-        display: none;
-    }
-
     tr.title th {
-        font-size: 1.1em;
-        font-weight: bold;
         text-transform: capitalize;
         padding-bottom: 0.2em;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    }
+
+    tr:not(.title) th::before {
+        content: "■";
+        float: left;
+        padding-right: 8px;
+        opacity: 30%;
     }
 
     tr.negative th {
@@ -178,13 +162,13 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
     }
 
     .quest {
-        border-top: 1px solid oklch(70% 25% 160deg);
-        text-align: center;
+        font-size: 90%;
+        border-left: 0.5ch solid oklch(67% 33% 160deg);
+        padding-left: 12px;
+        margin: 12px;
         font-style: italic;
-        margin: 0.5em -0.25em;
-        padding-top: 1em;
         display: grid;
-        grid-template-columns: min-content auto min-content;
+        grid-template-columns: auto repeat(3, min-content);
         height: 100%;
 
         :global(.editable) {

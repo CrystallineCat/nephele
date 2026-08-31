@@ -15,12 +15,10 @@ import { sheet } from "./sheet.svelte"
 
 :global(body) {
     font-family: "Comic Neue", cursive;
-    min-height: 100vh;
+    hyphens: auto;
+    text-wrap: pretty;
+    width: 350px;
     padding: 0;
     margin: 0;
-    overflow-y: scroll;
-    display: grid;
-    place-items: top center;
-    background: oklch(99% 1% 20deg);
 }
 </style>

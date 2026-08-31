@@ -16,13 +16,6 @@ let isEditing = $state(false)
 <article class="sheet">
     <h1><Editable bind:text={sheet.name} {isEditing} /></h1>
 
-    <aside>
-        <Toggle bind:value={isEditing}>
-            {#snippet renderFalse()}edit{/snippet}
-            {#snippet renderTrue()}editing...{/snippet}
-        </Toggle>
-    </aside>
-
     <main>
         {#each sheet.themeCards as _, i}
             <ThemeCard bind:themeCard={sheet.themeCards[i]} {isEditing} />
@@ -32,22 +25,22 @@ let isEditing = $state(false)
 
 <style>
 .sheet {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 2rem;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
 
     h1 {
         text-align: left;
-    }
-
-    aside {
-        display: flex;
-        gap: 0.5rem;
-        place-content: end;
+        margin: 0;
+        color: white;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        letter-spacing: 0em;
+        font-size: 1.125rem;
+        font-weight: bold;
+        line-height: 1.75;
+        padding: 16px;
+        border-bottom: 1px solid oklch(100% none none / 0.12);
     }
 
     main {

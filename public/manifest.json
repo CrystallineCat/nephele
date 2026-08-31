@@ -2,15 +2,12 @@
     "name": "Nephele",
     "version": "1.0.0",
     "manifest_version": 1,
-    "icon": "/icon.svg",
-    "author": "Magdalena Kiesel",
     "description": "A simple Legend in the Mist character sheet",
-    "homepage_url": "https://github.com/CrystallineCat/nephele",
     "action": {
         "title": "Nephele",
         "icon": "/icon.svg",
         "popover": "/",
-        "height": 1200,
-        "width": 700
+        "height": 900,
+        "width": 350
     }
 }
