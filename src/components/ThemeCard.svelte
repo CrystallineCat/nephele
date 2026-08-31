@@ -1,16 +1,16 @@
 <script lang="ts">
-import type { Tag, ThemeCard } from "../types/sheet.type"
-import Editable from "./Editable.svelte"
+import { Flame } from "@lucide/svelte"
+
+import type { Tag, ThemeCard } from "../sheet.svelte"
 
 interface Props {
     themeCard: ThemeCard
-    isEditing: boolean
 }
 
-let { themeCard = $bindable(), isEditing }: Props = $props()
+let { themeCard = $bindable() }: Props = $props()
 </script>
 
-<section class={{ "theme-card": true, editing: isEditing }}>
+<section class="theme-card">
     <table>
         {#each themeCard.tags as tag}
             {@render makeTagRow(tag)}
@@ -18,7 +18,7 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
     </table>
 
     <section class="quest">
-        <Editable bind:text={themeCard.quest} {isEditing} />
+        {themeCard.quest}
         {@render makeCounter("abandon", "⟨", [3, 2, 1])}
         {@render makeCounter("improve", "⏺", [1, 2, 3])}
         {@render makeCounter("milestone", "⟩", [1, 2, 3])}
@@ -44,7 +44,7 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
             <button
                 onclick={() => {
                     tag.isScratched = !tag.isScratched
-                }}>🔥</button
+                }}><Flame size="1em" /></button
             >
         </td>
     </tr>
@@ -119,7 +119,6 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
         right: 8px;
 
         button {
-            font-family: "Noto Emoji";
             opacity: 15%;
         }
     }
@@ -169,12 +168,8 @@ let { themeCard = $bindable(), isEditing }: Props = $props()
         font-style: italic;
         display: grid;
         grid-template-columns: auto repeat(3, min-content);
+        align-items: center;
         height: 100%;
-
-        :global(.editable) {
-            height: min-content;
-            place-self: center;
-        }
     }
 }
 </style>

@@ -1,24 +1,21 @@
 <script lang="ts">
-import type { CharacterSheet } from "../types/sheet.type"
+import type { CharacterSheet } from "../sheet.svelte"
 
-import Editable from "./Editable.svelte"
 import ThemeCard from "./ThemeCard.svelte"
-import Toggle from "./Toggle.svelte"
 
 interface Props {
     sheet: CharacterSheet
 }
 
 let { sheet }: Props = $props()
-let isEditing = $state(false)
 </script>
 
 <article class="sheet">
-    <h1><Editable bind:text={sheet.name} {isEditing} /></h1>
+    <h1>{sheet.name}</h1>
 
     <main>
         {#each sheet.themeCards as _, i}
-            <ThemeCard bind:themeCard={sheet.themeCards[i]} {isEditing} />
+            <ThemeCard bind:themeCard={sheet.themeCards[i]} />
         {/each}
     </main>
 </article>

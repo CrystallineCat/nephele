@@ -3,27 +3,27 @@ schema: spec-driven
 # Project context (optional)
 # This is shown to AI when creating artifacts.
 context: |
-    Project: nephele — a fork of DummySheet (kurara-ara/dummy-sheet), a
-    deliberately simple, system-agnostic RPG character sheet for people who
-    change systems often. Users edit sections/stats directly in the browser;
-    characters export/import as JSON. Integrates with Owlbear Rodeo via
-    @owlbear-rodeo/sdk (a GM can view player sheets through tabs).
+    Project: nephele — a fork of DummySheet (kurara-ara/dummy-sheet),
+    re-purposed as a deliberately simple Legend in the Mist character
+    sheet for Owlbear Rodeo. Integrates with Owlbear Rodeo via
+    @owlbear-rodeo/sdk v3 (popover extension, see public/manifest.json).
 
-    Tech stack: Svelte 5 (runes), Vite 8, TypeScript 6, sass. Package manager:
+    Tech stack: Svelte 5 (runes), Vite 8, TypeScript 6. Package manager:
     npm (package-lock.json is committed). Scripts: `npm run dev` (vite),
     `npm run build`, `npm run check` (svelte-check --tsconfig ./tsconfig.json).
 
-    Current shape: src/App.svelte is the shell; src/components/ holds the
-    sheet UI (sections, stats, theme editor, file import/export, GM binder
-    tabs). State lives in src/stores.ts (svelte stores) persisted to
-    localStorage via src/localStore.ts; src/services/OBRHelper.ts wraps the
-    Owlbear Rodeo SDK. Types in src/types/ (sheet, JSON schema).
+    Current shape: src/main.ts mounts src/App.svelte (the shell);
+    src/components/ holds the sheet UI (Sheet.svelte, ThemeCard.svelte).
+    State lives in src/sheet.svelte.ts (a $state rune module) as
+    hard-coded seed data — no persistence yet. Sheet types are exported
+    from src/sheet.svelte.ts. Icons via @lucide/svelte.
 
     Conventions that MUST be followed in this project:
     - Run `npm run check` after changing TypeScript or Svelte files; it must
       pass clean.
-    - Keep the sheet system-agnostic: no mechanics, stat names, or rules
-      hard-coded for a specific RPG system.
+    - The sheet is deliberately Legend in the Mist (decided 2026-08-31):
+      LitM mechanics, stat names, and rules text in the code are
+      intended, not drift.
 
 # Per-artifact rules (optional)
 # Add custom rules for specific artifacts.

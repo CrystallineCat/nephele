@@ -1,10 +1,12 @@
 # nephele
 
-A fork of DummySheet (kurara-ara/dummy-sheet): a deliberately simple,
-system-agnostic RPG character sheet for people who change systems often.
-Svelte 5 (runes) + Vite 8 + TypeScript 6; state lives in svelte stores
-persisted to localStorage; Owlbear Rodeo integration via
-`@owlbear-rodeo/sdk` v3. See README.md for how the sheet is used.
+A fork of DummySheet (kurara-ara/dummy-sheet), re-purposed as a
+deliberately simple Legend in the Mist character sheet for Owlbear
+Rodeo. Svelte 5 (runes) + Vite 8 + TypeScript 6; state currently lives
+in a `$state` rune module (`src/sheet.svelte.ts`) with hard-coded seed
+data — no persistence yet (parked, see TODOS-HUMAN.md). Owlbear Rodeo
+integration via `@owlbear-rodeo/sdk` v3. See README.md for how the
+sheet is used.
 
 ## Commands
 
@@ -22,8 +24,9 @@ This project uses OpenSpec (spec-driven schema). Specs and changes live in
 `openspec/config.yaml`. Start new work with the `/opsx-*` workflows or the
 `openspec-*` skills (both under `.kilocode/`).
 
-Keep the sheet system-agnostic: no mechanics, stat names, or rules hard-coded
-for a specific RPG system.
+The sheet is deliberately Legend in the Mist (decided 2026-08-31):
+LitM mechanics, stat names, and rules text in the code are intended,
+not drift.
 
 ## TODOS-HUMAN.md
 
